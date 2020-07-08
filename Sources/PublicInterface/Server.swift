@@ -196,8 +196,10 @@ extension Server: UpdateSessionHandlerDelegate {
         if !approved {
             do {
                 try disconnect(from: session)
+                delegate.server(self, didDisconnect: session)
             } catch { // session already disconnected
                 delegate.server(self, didDisconnect: session)
+                print("WC:- session already disconnected")
             }
         }
     }
